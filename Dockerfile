@@ -4,7 +4,7 @@ ENV PATH="/scripts:${PATH}"
 
 COPY ./requirements.txt /requirements.txt
 
-RUN apk add --update --no-cashe --virtual .tmp gcc libc-dev linux-headers
+RUN apk add --update --no-cache --virtual .tmp gcc libc-dev linux-headers
 
 RUN pip3 install -r /requirements.txt
 
