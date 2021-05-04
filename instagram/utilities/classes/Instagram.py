@@ -58,7 +58,7 @@ class Instagram:
 
 			random_num_to_sleep = random.uniform(1.5, 3.3)
 
-			print('sleep for:',random_num_to_sleep)
+			#print('sleep for:',random_num_to_sleep)
 
 			time.sleep(random_num_to_sleep)
 
