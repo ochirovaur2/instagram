@@ -36,9 +36,12 @@ class Instagram:
 
 		result = requests.get(url=url, headers=self.headers)
 
-		if result.status_code == 429:
+		if result.status_code > 400:
 			
-			return False
+			result = requests.get(url=url, headers=self.headers)
+			
+			if result.status_code > 400:
+				result = requests.get(url=url, headers=self.headers)
 
 		data =  json.loads(result.text)
 	
