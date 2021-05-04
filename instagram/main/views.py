@@ -15,8 +15,8 @@ def get_followers(request):
     Для работы с API необходимо отправить post запрос, в поле content необходимо вставить следующую информацию:
 
     {
-		"sessionid" : "1558387502%3Ay4mOggyQrbcgdy%3A18",
-		"login": "_shirling_"
+		"sessionid" : "36059209189%3AqFBw0JXsMAzlbQ%3A21",
+		"login": "aiur95_"
     }
     """
 	request_attr = json.loads(request.body)
@@ -39,8 +39,8 @@ def get_list_of_unfollowing_users(request):
     Для работы с API необходимо отправить post запрос, в поле content необходимо вставить следующую информацию:
 
     {
-		"sessionid" : "1558387502%3Ay4mOggyQrbcgdy%3A18",
-		"login": "_shirling_"
+		"sessionid" : "36059209189%3AqFBw0JXsMAzlbQ%3A21",
+		"login": "aiur95_"
     }
     """
 	request_attr = json.loads(request.body)
