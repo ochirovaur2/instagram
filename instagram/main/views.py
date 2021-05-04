@@ -49,9 +49,12 @@ def get_list_of_unfollowing_users(request):
 
 	msg, status_code = handle_get_list_of_unfollowing_users(sessionid, login)
 	if status_code == 200:
+		print("ok")
 		return Response( {"msg": msg} , status=status.HTTP_200_OK)
 	elif status_code == 429:
+		print(msg)
 		return Response( {"msg": msg} , status=status.HTTP_400_BAD_REQUEST)
 	else:
+		print(msg)
 		return Response( {"msg": msg} , status=status.HTTP_204_NO_CONTENT)
 		
