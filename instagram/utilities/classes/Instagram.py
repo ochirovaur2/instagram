@@ -32,42 +32,46 @@ class Instagram:
 
 
 	def get_users(self, final_list, variables, query_data):
-		url = f'{self.base_url}/graphql/query/?query_hash={query_data["query_hash"]}&variables={urllib.parse.quote(variables)}'
-
-		result = requests.get(url=url, headers=self.headers)
-
-		if result.status_code > 400:
-			time.sleep(3)
-			result = requests.get(url=url, headers=self.headers)
+		try:
 			
+			url = f'{self.base_url}/graphql/query/?query_hash={query_data["query_hash"]}&variables={urllib.parse.quote(variables)}'
+
+			result = requests.get(url=url, headers=self.headers)
+
 			if result.status_code > 400:
-				return final_list
-				
+				time.sleep(3)
+				result = requests.get(url=url, headers=self.headers)
 
-		data =  json.loads(result.text)
-	
-		edge_followed_data = data["data"]["user"][query_data['dict_key']]
+				if result.status_code > 400:
+					return final_list
 
-		users = [user["node"]["username"] for user in edge_followed_data["edges"]] 
 
-		final_list = [*final_list, *users]
+			data =  json.loads(result.text)
 
-		print(len(final_list))
+			edge_followed_data = data["data"]["user"][query_data['dict_key']]
 
-		page_info = edge_followed_data["page_info"]
-		has_next_page = page_info['has_next_page']
-		end_cursor = page_info['end_cursor']
+			users = [user["node"]["username"] for user in edge_followed_data["edges"]] 
 
-		if has_next_page:
+			final_list = [*final_list, *users]
 
-			random_num_to_sleep = random.uniform(1.5, 3.3)
+			print(len(final_list))
 
-			#print('sleep for:',random_num_to_sleep)
+			page_info = edge_followed_data["page_info"]
+			has_next_page = page_info['has_next_page']
+			end_cursor = page_info['end_cursor']
 
-			time.sleep(random_num_to_sleep)
+			if has_next_page:
 
-			variables = '{"id":"' + self.user_id + '","include_reel":true,"fetch_mutual":false,"first":13,"after":"'+f'{end_cursor}'+'"}'
+				random_num_to_sleep = random.uniform(1.5, 3.3)
 
-			return self.get_users(final_list, variables, query_data)
-		else:
-			return final_list	
+				#print('sleep for:',random_num_to_sleep)
+
+				time.sleep(random_num_to_sleep)
+
+				variables = '{"id":"' + self.user_id + '","include_reel":true,"fetch_mutual":false,"first":13,"after":"'+f'{end_cursor}'+'"}'
+
+				return self.get_users(final_list, variables, query_data)
+			else:
+				return final_list	
+		except:
+			return final_list
