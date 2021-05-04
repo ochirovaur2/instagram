@@ -60,7 +60,7 @@ class Instagram:
 
 			#print('sleep for:',random_num_to_sleep)
 
-			#time.sleep(random_num_to_sleep)
+			time.sleep(random_num_to_sleep)
 
 			variables = '{"id":"' + self.user_id + '","include_reel":true,"fetch_mutual":false,"first":13,"after":"'+f'{end_cursor}'+'"}'
 
